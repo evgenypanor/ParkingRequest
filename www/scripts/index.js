@@ -10,6 +10,9 @@ var myApp;
 var $$;
 var dataResults = [];
 var viewModel = [];
+var currentItemId;
+var mainView;
+
 
 (function () {
     "use strict";
@@ -49,7 +52,7 @@ var viewModel = [];
 
         //jq = jQuery.noConflict();
 
-        var mainView = myApp.addView('.view-main', {
+        mainView = myApp.addView('.view-main', {
             // Because we use fixed-through navbar we can enable dynamic navbar
             dynamicNavbar: true
         });
@@ -75,7 +78,7 @@ var viewModel = [];
         myApp.onPageInit('newRequest', function (page) {
             //alert('init');
             handleLoadStarted();
-            alert('before validate');
+            //alert('before validate');
             try {
                 jQuery('#inputContainerForm').validate({ // initialize the plugin
                     rules: {
@@ -84,7 +87,7 @@ var viewModel = [];
                         }
                     },
                     submitHandler: function (form) {
-                        alert("submitted");
+                        //alert("submitted");
                         UploadData();
                         return false;
                     }
@@ -93,7 +96,7 @@ var viewModel = [];
             catch (err) {
                 alert(err.message);
             }
-            alert('after validate');
+            //alert('after validate');
             LoadStreetsData();
         });
 
@@ -101,6 +104,9 @@ var viewModel = [];
             //alert('init');
 
             handleLoadStarted();
+            currentItemId = page.query.itmId;
+            $$('#deleteItem').on('click', DeleteData);
+            $$('#editItem').on('click', EditData);
             LoadSingleItem(page.query.itmId);
 
         });
@@ -251,28 +257,63 @@ function getDropDownList(id, optionList) {
 
 
 function UploadData() {
-
+    myApp.showPreloader('שומר נתונים...');
     var tbl = tlvmobileappClient.getTable("ParkingCharacterDataTBL");
     //var jsonRes = [];
     var itm = {};
-    itm["firstName"] = $$("#firstName").val();
-    itm["lastName"] = $$("#lastName").val();
-    itm["tz"] = $$("#tz").val();
-    itm["carPlate"] = $$("#carPlate").val();
-    itm["phoneNum"] = $$("#phoneNum").val();
-    itm["additionalPhoneNum"] = $$("#additionalPhoneNum").val();
-    itm["email"] = $$("#useremail").val();
-    itm["arnona"] = $$("#arnona").val();
-    itm["address"] = $$("#address").val();
-    itm["homeNum"] = $$("#homeNum").val();
-    itm["entrance"] = $$("#entrance").val();
-    itm["appartments"] = $$("#appartments").val();
-    itm["zip"] = $$("#zip").val();
-    itm["carOwnership"] = $$("input[name=carOwnership]:checked").val();
-    itm["imgbase64"] = $$("#lisenceImage").src;
+    itm["firstName"] = jQuery("#firstName").val();
+    itm["lastName"] = jQuery("#lastName").val();
+    itm["tz"] = jQuery("#tz").val();
+    itm["carPlate"] = jQuery("#carPlate").val();
+    itm["phoneNum"] = jQuery("#phoneNum").val();
+    itm["additionalPhoneNum"] = jQuery("#additionalPhoneNum").val();
+    itm["email"] = jQuery("#email").val();
+    itm["arnona"] = jQuery("#arnona").val();
+    itm["address"] = jQuery("#address").text();
+    itm["homeNum"] = jQuery("#homeNum").val();
+    itm["entrance"] = jQuery("#entrance").val();
+    itm["appartments"] = jQuery("#appartments").val();
+    itm["zip"] = jQuery("#zip").val();
+    itm["carOwnership"] = jQuery("input[name=carOwnership]:checked").val();
+    itm["imgbase64"] = jQuery("#lisenceImage").src;
 
     //jsonRes.push(itm);
     tbl.insert(itm).done(handleSuccess, handleError);
+}
+
+function handleSuccess() {
+    myApp.hidePreloader();
+    myApp.alert('נתונים נשמרו בהצלחה');
+    $$('#inputContainerForm')[0].reset();
+}
+
+function handleError(error) {
+    myApp.hidePreloader();
+    var text = error + (error.request ? ' - ' + error.request.status : '');
+    myApp.alert(text);
+}
+
+function DeleteData() {
+    myApp.confirm('האם ברצונך למחוק פריט זה ?', 'מחיקת פריט', function () {
+        var tbl = tlvmobileappClient.getTable("ParkingCharacterDataTBL");
+        tbl.del({
+            id: currentItemId
+        }).done(function () {
+            mainView.router.back(
+                { 
+                    url: "AppPages/MainPage/MainPage.html",
+                    force: true,
+                });
+            //mainView.router.reloadPage("AppPages/MainPage/MainPage.html");
+        }, function (err) {
+            alert("Error: " + err);
+        });
+    });
+}
+
+function EditData()
+{
+
 }
 
 function CaptureImage() {
