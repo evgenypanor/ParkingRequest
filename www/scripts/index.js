@@ -26,9 +26,9 @@ var viewModel = [];
 
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
-        document.addEventListener( 'pause', onPause.bind( this ), false );
-        document.addEventListener( 'resume', onResume.bind( this ), false );
-        
+        document.addEventListener('pause', onPause.bind(this), false);
+        document.addEventListener('resume', onResume.bind(this), false);
+
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
 
         // Initialize your app
@@ -75,25 +75,31 @@ var viewModel = [];
         myApp.onPageInit('newRequest', function (page) {
             //alert('init');
             handleLoadStarted();
-            //alert('before validate');
-            //$$('#inputContainerForm').validate({ // initialize the plugin
-            //    rules: {
-            //        firstName: {
-            //            required: true
-            //        }
-            //    },
-            //    submitHandler: function (form) {
-            //        UploadData();
-            //        return false;
-            //    }
-            //});
-            //alert('after validate');
+            alert('before validate');
+            try {
+                jQuery('#inputContainerForm').validate({ // initialize the plugin
+                    rules: {
+                        firstName: {
+                            required: true
+                        }
+                    },
+                    submitHandler: function (form) {
+                        alert("submitted");
+                        UploadData();
+                        return false;
+                    }
+                });
+            }
+            catch (err) {
+                alert(err.message);
+            }
+            alert('after validate');
             LoadStreetsData();
         });
 
         myApp.onPageInit('viewItem', function (page) {
             //alert('init');
-            
+
             handleLoadStarted();
             LoadSingleItem(page.query.itmId);
 
