@@ -29,3 +29,25 @@
 .ownedByChildDivVisible {
     display: block;
 }
+
+/*@media screen and (max-width: 980px) {
+    label.win-type-small {
+        display: inline-block;
+        width: 20%;
+    }
+}*/
+label.win-type-small {
+        display: inline-block;
+        width: 20%;
+    }
+
+@media screen and (max-width: 360px) {
+    label.win-type-small {
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+.no-margin{
+    margin:0px !important;
+}
