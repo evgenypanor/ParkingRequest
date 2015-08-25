@@ -1,0 +1,5 @@
+﻿.mainScrollableContainer {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /*min-height:500px;*/
+}

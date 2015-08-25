@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com  'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <title>ParkingRequestApp</title>
+    <link href="WinJS/css/ui-light.min.css" rel="stylesheet" />
+    <link href="Framework7/css/framework7.ios.min.css" rel="stylesheet" />
+    <link href="Framework7/css/framework7.ios.rtl.min.css" rel="stylesheet" />
+    <link href="Framework7/css/framework7.ios.colors.min.css" rel="stylesheet" />
+    <!--<link href="Framework7/css/framework7.material.min.css" rel="stylesheet" />
+    <link href="Framework7/css/framework7.material.colors.min.css" rel="stylesheet" />
+    <link href="Framework7/css/framework7.material.rtl.min.css" rel="stylesheet" />-->
+    <link href="jquery/themes/base/core.css" rel="stylesheet" />
+    <link href="jquery/themes/base/all.css" rel="stylesheet" />
+    <link href="jquery/themes/base/autocomplete.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+</head>
+<body dir="rtl">
+    
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="jquery/jquery-2.1.4.js"></script>
+
+    <!-- tlvmobileapp references -->
+    <script src="services/mobileServices/settings/tlvmobileapp.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+
+    <script src="jquery/jquery.validate.min.js"></script>
+    <script src="jquery/jquery-ui-1.11.4.min.js"></script>
+    <script src="WinJS/js/base.min.js"></script>
+    <script src="WinJS/js/ui.min.js"></script>
+
+
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block">
+
+            <a href="about.html" class="item-link close-panel">
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">בקשה חדשה</div>
+                    </div>
+                </div>
+            </a>
+            <a href="AppPages/MainPage/MainPage.html" class="item-link close-panel">
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">רשימת בקשות</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- Right panel with cover effect-->
+    <div class="panel panel-right panel-cover">
+        <div class="content-block">
+            <p>Right panel content goes here</p>
+        </div>
+    </div>
+    <!-- Views-->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class-->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We have home navbar without left link-->
+                    <div class="center sliding">בקשות תווי חנייה</div>
+                    <div class="right">
+                        <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, data-page contains page name-->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content-->
+                    <div class="page-content">
+                        <div class="content-block-title">אפליקצית בקשות תווי חנייה</div>
+                        <div class="content-block">
+                            <div class="content-block-inner">
+                                <p>אפליקציה זו מאפשרת צפיה, עדכון ויצירת בקשות חדשות לתווי חניה בקלות ונוחות ! </p>
+                             </div>
+                        </div>
+                        <div class="content-block-title">יש לבחור באחת מאפשרויות</div>
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <a href="AppPages/NewRequestPage/NewRequest.html" class="item-link">
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">בקשה חדשה</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="AppPages/MainPage/MainPage.html" class="item-link">
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">רשימת בקשות</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Framework7/js/framework7.min.js"></script>
+    <script src="scripts/index.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿.carOwnershipHidden {
+    display: none;
+}
+
+.carOwnershipVisible {
+    display: block;
+}
+
+.companyCarDivHidden {
+    display: none;
+}
+
+.rentalCarDivHidden {
+    display: none;
+}
+
+.ownedByChildDivHidden {
+    display: none;
+}
+
+.companyCarDivVisible {
+    display: block;
+}
+
+.rentalCarDivVisible {
+    display: block;
+}
+
+.ownedByChildDivVisible {
+    display: block;
+}

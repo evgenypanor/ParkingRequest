@@ -1,0 +1,139 @@
+﻿
+
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left"><!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a></div>
+        <div class="center sliding">בקשה חדשה</div>
+        <div class="right">
+            <a href="#" class="back link"> <i class="icon icon-back"></i><span>חזור</span></a>
+        </div>
+    </div>
+</div>
+
+<div class="pages">
+    <!-- Page, data-page contains page name-->
+    <div data-page="newRequest" class="page">
+        <div class="page-content">
+            <form id="inputContainerForm">
+                <div class="content-block">
+                    <div id="inputContainerDiv" class="mainScrollableContainer">
+                        <div id="mainDiv">
+                            <div id="appHeader">
+                                <h2 class="win-h2">בקשה חדשה לתו חניה</h2>
+                            </div>
+                            <div>
+                                <label for="firstName" class="win-type-small">שם פרטי</label>
+                                <input id="firstName" name="firstName" type="text" class="win-textbox" placeholder="" required lang="he" />
+                            </div>
+                            <div>
+                                <label for="lastName" class="win-type-small">שם משפחה </label>
+                                <input id="lastName" name="lastName" type="text" class="win-textbox" placeholder="שם משפחה" required lang="he" />
+                            </div>
+                            <div>
+                                <label for="tz" class="win-type-small">תעודת זהות</label>
+                                <input id="tz" type="number" name="tz" class="win-textbox" pattern="\d{9}$" placeholder="" required lang="he" />
+                            </div>
+                            <div>
+                                <label for="carPlate" class="win-type-small">מספר רכב</label>
+                                <input id="carPlate" name="carPlate" type="number" maxlength="7" pattern="\d{7}$" class="win-textbox" placeholder="" required lang="he" />
+                            </div>
+                            <div>
+                                <label for="phoneNum" class="win-type-small">טלפון ליצירת קשר</label>
+                                <input id="phoneNum" name="phoneNum" type="tel" maxlength="9" pattern="\d{7,9}$" class="win-textbox" placeholder="" required lang="he" />
+                            </div>
+                            <div>
+                                <label for="additionalPhoneNum" class="win-type-small">טלפון נוסף</label>
+                                <input id="additionalPhoneNum" name="additionalPhoneNum" type="tel" maxlength="9" pattern="\d{7,9}$" class="win-textbox" placeholder="" lang="he" />
+                            </div>
+                            <div>
+                                <label for="useremail" class="win-type-small">דואר אלקטרוני</label>
+                                <input id="useremail" name="useremail" type="email" class="win-textbox" placeholder="" lang="he" />
+                            </div>
+                            <div>
+                                <label for="arnona" class="win-type-small">מספר חשבון לקוח בארנונה</label>
+                                <input id="arnona" name="arnona" type="number" maxlength="13" pattern="\d{10,13}$" class="win-textbox" required placeholder="" lang="he" />
+                            </div>
+                        </div>
+                        <div class="blockDiv">
+                            <fieldset>
+                                <legend class="win-type-medium">כתובת מגורים למשלוח תו החניה (המעודכנת במשרד הפנים)</legend>
+                                <!--<div>
+                                    <label for="address" class="win-type-small">רחוב</label>
+                                    <input id="address" name="address" type="text" class="win-textbox" placeholder="" lang="he" />
+                                </div>-->
+                                <div class="list-block">
+                                    <ul>
+                                        <!-- Smart select item -->
+                                        <li>
+                                            <!-- Additional "smart-select" class -->
+                                            <a href="#" class="item-link smart-select" data-virtual-list="true" data-searchbar="true" data-searchbar-placeholder="Search street" data-back-on-select="true">
+                                                <!-- select -->
+                                                <select id="streetsSelect" name="streetsSelect"></select>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <!-- Select label -->
+                                                        <div class="item-title">רחוב</div>
+                                                        <!-- Selected value, not required -->
+                                                        <div id="address" name="address" class="item-after"></div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <label for="homeNum" class="win-type-small">מס' בית</label>
+                                    <input id="homeNum" name="homeNum" type="number" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
+                                </div>
+                                <div>
+                                    <label for="entrance" class="win-type-small">כניסה</label>
+                                    <input id="entrance" name="entrance" type="text" maxlength="2" class="win-textbox" placeholder="" required lang="he" />
+                                </div>
+                                <div>
+                                    <label for="appartments" class="win-type-small">דירה</label>
+                                    <input id="appartments" name="appartments" type="text" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
+                                </div>
+                                <div>
+                                    <label for="zip" class="win-type-small">מיקוד</label>
+                                    <input id="zip" name="zip" type="number" maxlength="7" class="win-textbox" placeholder="" lang="he" />
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div>
+                            <fieldset>
+                                <legend class="win-type-medium">סוג הבעלות על הרכב</legend>
+                                <div>
+                                    <input class="win-radio" type="radio" name="carOwnership" value="privateCar" checked="checked" id="privateCar" onclick="RadioCahngedHandler();" /><label for="largescreen">רכב פרטי</label>
+                                </div>
+                                <div>
+                                    <input class="win-radio" type="radio" name="carOwnership" value="companyCar" id="companyCar" onclick="RadioCahngedHandler();" /><label for="mediumscreen">רכב ממקום העבודה</label>
+                                </div>
+                                <div>
+                                    <input class="win-radio" type="radio" name="carOwnership" value="rentalCar" id="rentalCar" onclick="RadioCahngedHandler();" /><label for="smallscreen">רכב שכור (7 ימים ומעלה)</label>
+                                </div>
+                                <div>
+                                    <input class="win-radio" type="radio" name="carOwnership" value="ownedByChild" id="ownedByChild" onclick="RadioCahngedHandler();" /><label for="smallscreen">בנו או בתו של בעל הרכב הרשום במשרד הרישוי </label>
+                                </div>
+                                <div>
+                                    <div id="carOwnershipContainer" class="carOwnershipHidden">
+                                        <div id="companyCarDiv" class="companyCarDivHidden">
+                                        </div>
+                                        <div id="rentalCarDiv" class="rentalCarDivHidden">
+                                        </div>
+                                        <div id="ownedByChildDiv" class="ownedByChildDivHidden">
+                                        </div>
+                                        <button class="win-button" type="button" onclick="CaptureImage();">סריקת מסמך</button>
+                                        <img class="lisenceImageHiden" id="lisenceImage" width="250" height="250" />
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div>
+                            <button id="btnSubmit" class="win-button" type="submit">שלח</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

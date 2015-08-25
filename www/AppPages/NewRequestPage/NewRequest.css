@@ -1,0 +1,13 @@
+﻿.mainScrollableContainer {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /*min-height:500px;*/
+}
+
+/*.div1 {
+    height: 100px;
+}
+
+.div2{
+   height: calc( 100% - 100px ); 
+}*/
