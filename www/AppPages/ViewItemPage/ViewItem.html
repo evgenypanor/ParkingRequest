@@ -12,7 +12,6 @@
         <!-- Page, data-page contains page name-->
         <div data-page="viewItem" class="page">
             <div id="bindableCore" class="page-content">
-
                 <div class="content-block">
                     <div id="mainDiv">
                         <div>
@@ -21,31 +20,31 @@
                         </div>
                         <div>
                             <label for="lastName" class="win-type-small">שם משפחה </label>
-                            <input id="lastName" name="lastName" data-win-bind="value: lastName" type="text" class="win-textbox" placeholder="שם משפחה" required lang="he" />
+                            <input readonly id="lastName" name="lastName" data-win-bind="value: lastName" type="text" class="win-textbox" placeholder="שם משפחה" required lang="he" />
                         </div>
                         <div>
                             <label for="tz" class="win-type-small">תעודת זהות</label>
-                            <input id="tz" type="number" name="tz" data-win-bind="value: tz" class="win-textbox" pattern="\d{9}$" placeholder="" required lang="he" />
+                            <input readonly id="tz" type="number" name="tz" data-win-bind="value: tz" class="win-textbox" pattern="\d{9}$" placeholder="" required lang="he" />
                         </div>
                         <div>
                             <label for="carPlate" class="win-type-small">מספר רכב</label>
-                            <input id="carPlate" name="carPlate" data-win-bind="value: carPlate" type="number" maxlength="7" pattern="\d{7}$" class="win-textbox" placeholder="" required lang="he" />
+                            <input readonly id="carPlate" name="carPlate" data-win-bind="value: carPlate" type="number" maxlength="7" pattern="\d{7}$" class="win-textbox" placeholder="" required lang="he" />
                         </div>
                         <div>
                             <label for="phoneNum" class="win-type-small">טלפון ליצירת קשר</label>
-                            <input id="phoneNum" name="phoneNum" data-win-bind="value: phoneNum" type="tel" maxlength="9" pattern="\d{7,9}$" class="win-textbox" placeholder="" required lang="he" />
+                            <input readonly id="phoneNum" name="phoneNum" data-win-bind="value: phoneNum" type="tel" maxlength="9" pattern="\d{7,9}$" class="win-textbox" placeholder="" required lang="he" />
                         </div>
                         <div>
                             <label for="additionalPhoneNum" class="win-type-small">טלפון נוסף</label>
-                            <input id="additionalPhoneNum" data-win-bind="value: additionalPhoneNum" name="additionalPhoneNum" type="tel" maxlength="9" pattern="\d{7,9}$" class="win-textbox" placeholder="" lang="he" />
+                            <input readonly id="additionalPhoneNum" data-win-bind="value: additionalPhoneNum" name="additionalPhoneNum" type="tel" maxlength="9" pattern="\d{7,9}$" class="win-textbox" placeholder="" lang="he" />
                         </div>
                         <div>
                             <label for="email" class="win-type-small">דואר אלקטרוני</label>
-                            <input id="email" name="email" data-win-bind="value: email" type="email" class="win-textbox" placeholder="" lang="he" />
+                            <input readonly id="email" name="email" data-win-bind="value: email" type="email" class="win-textbox" placeholder="" lang="he" />
                         </div>
                         <div>
                             <label for="arnona" class="win-type-small">מספר חשבון לקוח בארנונה</label>
-                            <input id="arnona" name="arnona" data-win-bind="value: arnona" type="number" maxlength="13" pattern="\d{10,13}$" class="win-textbox" required placeholder="" lang="he" />
+                            <input readonly id="arnona" name="arnona" data-win-bind="value: arnona" type="number" maxlength="13" pattern="\d{10,13}$" class="win-textbox" required placeholder="" lang="he" />
                         </div>
                     </div>
                     <div>
@@ -53,23 +52,23 @@
                             <legend class="win-type-medium">כתובת מגורים למשלוח תו החניה (המעודכנת במשרד הפנים)</legend>
                             <div>
                                 <label for="address" class="win-type-small">רחוב</label>
-                                <input id="address" name="address" data-win-bind="value: address" type="text" class="win-textbox" placeholder="" lang="he" />
+                                <input readonly id="address" name="address" data-win-bind="value: address" type="text" class="win-textbox" placeholder="" lang="he" />
                             </div>
                             <div>
                                 <label for="homeNum" class="win-type-small">מס' בית</label>
-                                <input id="homeNum" name="homeNum" data-win-bind="value: homeNum" type="number" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
+                                <input readonly id="homeNum" name="homeNum" data-win-bind="value: homeNum" type="number" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
                             </div>
                             <div>
                                 <label for="entrance" class="win-type-small">כניסה</label>
-                                <input id="entrance" name="entrance" data-win-bind="value: entrance" type="text" maxlength="2" class="win-textbox" placeholder="" required lang="he" />
+                                <input readonly id="entrance" name="entrance" data-win-bind="value: entrance" type="text" maxlength="2" class="win-textbox" placeholder="" required lang="he" />
                             </div>
                             <div>
                                 <label for="appartments" class="win-type-small">דירה</label>
-                                <input id="appartments" name="appartments" data-win-bind="value: appartments" type="text" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
+                                <input readonly id="appartments" name="appartments" data-win-bind="value: appartments" type="text" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
                             </div>
                             <div>
                                 <label for="zip" class="win-type-small">מיקוד</label>
-                                <input id="zip" name="zip" type="number" data-win-bind="value: zip" maxlength="7" class="win-textbox" placeholder="" lang="he" />
+                                <input readonly id="zip" name="zip" type="number" data-win-bind="value: zip" maxlength="7" class="win-textbox" placeholder="" lang="he" />
                             </div>
                         </fieldset>
                     </div>
@@ -77,16 +76,16 @@
                         <fieldset>
                             <legend class="win-type-medium">סוג הבעלות על הרכב</legend>
                             <div>
-                                <input class="win-radio" type="radio" name="carOwnership" value="privateCar" checked="checked" id="privateCar" onclick="RadioCahngedHandler();" /><label for="privateCar">רכב פרטי</label>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="privateCar" checked="checked" id="privateCar" onclick="RadioCahngedHandler();" /><label for="privateCar">רכב פרטי</label>
                             </div>
                             <div>
-                                <input class="win-radio" type="radio" name="carOwnership" value="companyCar" id="companyCar" onclick="RadioCahngedHandler();" /><label for="companyCar">רכב ממקום העבודה</label>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="companyCar" id="companyCar" onclick="RadioCahngedHandler();" /><label for="companyCar">רכב ממקום העבודה</label>
                             </div>
                             <div>
-                                <input class="win-radio" type="radio" name="carOwnership" value="rentalCar" id="rentalCar" onclick="RadioCahngedHandler();" /><label for="rentalCar">רכב שכור (7 ימים ומעלה)</label>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="rentalCar" id="rentalCar" onclick="RadioCahngedHandler();" /><label for="rentalCar">רכב שכור (7 ימים ומעלה)</label>
                             </div>
                             <div>
-                                <input class="win-radio" type="radio" name="carOwnership" value="ownedByChild" id="ownedByChild" onclick="RadioCahngedHandler();" /><label for="ownedByChild">בנו או בתו של בעל הרכב הרשום במשרד הרישוי </label>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="ownedByChild" id="ownedByChild" onclick="RadioCahngedHandler();" /><label for="ownedByChild">בנו או בתו של בעל הרכב הרשום במשרד הרישוי </label>
                             </div>
                             <div>
                                 <div id="carOwnershipContainer" class="carOwnershipHidden">
