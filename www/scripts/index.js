@@ -161,8 +161,7 @@ function LoadTableData() {
             items: dataResults,
             renderItem: function (index, item) {
                 return '<a href="AppPages/ViewItemPage/ViewItem.html?itmId=' + item.id + '" class="item-link"><li class="item-content">' +
-                          '<div class="item-media"><img src="' + item.imgbase64 + '"></div>' +
-                          '<div class="item-inner">' +
+                              '<div class="item-inner">' +
                               '<div class="item-title item-title-serachable">' + item.firstName + '&nbsp;' + item.lastName + '</div>' +
                               '<div class="item-title item-title-serachable">' + item.tz + '</div>' +
                           '</div>' +
@@ -275,7 +274,7 @@ function UploadData() {
     itm["appartments"] = jQuery("#appartments").val();
     itm["zip"] = jQuery("#zip").val();
     itm["carOwnership"] = jQuery("input[name=carOwnership]:checked").val();
-    itm["imgbase64"] = jQuery("#lisenceImage").src;
+    itm["imgbase64"] = jQuery("#lisenceImage").attr('src');
 
     //jsonRes.push(itm);
     tbl.insert(itm).done(handleSuccess, handleError);
