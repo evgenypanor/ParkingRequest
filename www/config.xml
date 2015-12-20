@@ -62,9 +62,7 @@
 
 
   <gap:plugin name="com.microsoft.azure-mobile-services"  />
-  <gap:plugin name="org.apache.cordova.file-transfer" />
   <gap:plugin name="org.apache.cordova.file"  />
-  <gap:plugin name="org.apache.cordova.inappbrowser"  />
   <gap:plugin name="org.apache.cordova.inappbrowser"  />
   <gap:plugin name="org.apache.cordova.camera" />
   <gap:plugin name="org.apache.cordova.geolocation" />
