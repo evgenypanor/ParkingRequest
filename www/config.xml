@@ -62,12 +62,12 @@
   <gap:splash src="res/screens/windows-phone/screen-portrait.jpg"      gap:platform="winphone" />
 
 
-  <plugin name="com.microsoft.azure-mobile-services"  />
-  <plugin name="org.apache.cordova.file"  />
-  <plugin name="cordova-plugin-inappbrowser"  />
-  <plugin name="org.apache.cordova.camera" />
-  <plugin name="org.apache.cordova.geolocation" />
-  <plugin name="cordova.custom.plugins.exitapp" /> 
-  <plugin name="com.phonegap.plugins.barcodescanner" />
+  <gap:plugin name="com.microsoft.azure-mobile-services"  />
+  <gap:plugin name="org.apache.cordova.file"  />
+  <gap:plugin name="cordova-plugin-inappbrowser"  />
+  <gap:plugin name="org.apache.cordova.camera" />
+  <gap:plugin name="org.apache.cordova.geolocation" />
+  <gap:plugin name="cordova.custom.plugins.exitapp" /> 
+  <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 
 </widget>
