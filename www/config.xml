@@ -64,7 +64,6 @@
 
   <plugin name="cordova-plugin-ms-azure-mobile-apps"  />
   <plugin name="org.apache.cordova.file"  />
-  <plugin name="cordova-plugin-inappbrowser"  />
   <plugin name="org.apache.cordova.camera" />
   <plugin name="org.apache.cordova.geolocation" />
   <plugin name="cordova.custom.plugins.exitapp" /> 
