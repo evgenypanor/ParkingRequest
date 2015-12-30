@@ -62,7 +62,7 @@
   <gap:splash src="res/screens/windows-phone/screen-portrait.jpg"      gap:platform="winphone" />
 
 
-  <plugin name="com.microsoft.azure-mobile-services"  />
+  <plugin name="cordova-plugin-ms-azure-mobile-apps"  />
   <plugin name="org.apache.cordova.file"  />
   <plugin name="org.apache.cordova.inappbrowser"  />
   <plugin name="org.apache.cordova.camera" />
