@@ -1,0 +1,99 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left"><!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a></div>
+        <div class="center sliding">בקשה לתו חניה</div>
+        <div class="right">
+            <a href="#" class="back link"> <i class="icon icon-back"></i><span>חזור</span></a>
+        </div>
+    </div>
+</div>
+<form id="inputContainerForm">
+    <div class="pages">
+        <!-- Page, data-page contains page name-->
+        <div data-page="viewItemSmall" class="page">
+            <div id="bindableCore" class="page-content">
+                <div class="content-block">
+                    <div id="mainDiv">
+                        <div>
+                            <label for="firstName" class="win-type-small">שם פרטי</label>
+                            <input id="firstName" data-win-bind="value: firstname" name="firstname" type="text" class="win-textbox" readonly placeholder="" required lang="he" />
+                        </div>
+                        <div>
+                            <label for="lastName" class="win-type-small">שם משפחה </label>
+                            <input readonly id="lastName" name="lastName" data-win-bind="value: lastname" type="text" class="win-textbox" placeholder="שם משפחה" required lang="he" />
+                        </div>
+                        <div>
+                            <label for="tz" class="win-type-small">תעודת זהות</label>
+                            <input readonly id="tz" type="number" name="tz" data-win-bind="value: tz" class="win-textbox" pattern="\d{9}$" placeholder="" required lang="he" />
+                        </div>
+                        <div>
+                            <label for="carPlate" class="win-type-small">מספר רכב</label>
+                            <input readonly id="carPlate" name="carPlate" data-win-bind="value: carplate" type="number" maxlength="7" pattern="\d{7}$" class="win-textbox" placeholder="" required lang="he" />
+                        </div>
+                        <div>
+                            <label for="email" class="win-type-small">דואר אלקטרוני</label>
+                            <input readonly id="email" name="email" data-win-bind="value: email" type="email" class="win-textbox" placeholder="" lang="he" />
+                        </div>
+                    </div>
+                    <div>
+                        <fieldset>
+                            <legend class="win-type-medium">כתובת מגורים למשלוח תו החניה (המעודכנת במשרד הפנים)</legend>
+                            <div>
+                                <label for="address" class="win-type-small">רחוב</label>
+                                <input readonly id="address" name="address" data-win-bind="value: address" type="text" class="win-textbox" placeholder="" lang="he" />
+                            </div>
+                            <div>
+                                <label for="homeNum" class="win-type-small">מס' בית</label>
+                                <input readonly id="homeNum" name="homeNum" data-win-bind="value: homenum" type="number" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
+                            </div>
+                            <div>
+                                <label for="appartments" class="win-type-small">דירה</label>
+                                <input readonly id="appartments" name="appartments" data-win-bind="value: appartments" type="text" maxlength="4" class="win-textbox" placeholder="" required lang="he" />
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset>
+                            <legend class="win-type-medium">סוג הבעלות על הרכב</legend>
+                            <div>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="privateCar" checked="checked" id="privateCar" onclick="RadioCahngedHandler();" /><label for="privateCar">רכב פרטי</label>
+                            </div>
+                            <div>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="companyCar" id="companyCar" onclick="RadioCahngedHandler();" /><label for="companyCar">רכב ממקום העבודה</label>
+                            </div>
+                            <div>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="rentalCar" id="rentalCar" onclick="RadioCahngedHandler();" /><label for="rentalCar">רכב שכור (7 ימים ומעלה)</label>
+                            </div>
+                            <div>
+                                <input readonly class="win-radio" type="radio" name="carOwnership" value="ownedByChild" id="ownedByChild" onclick="RadioCahngedHandler();" /><label for="ownedByChild">בנו או בתו של בעל הרכב הרשום במשרד הרישוי </label>
+                            </div>
+                            <div>
+                                <div id="carOwnershipContainer" class="carOwnershipHidden">
+                                    <div id="companyCarDiv" class="companyCarDivHidden">
+                                    </div>
+                                    <div id="rentalCarDiv" class="rentalCarDivHidden">
+                                    </div>
+                                    <div id="ownedByChildDiv" class="ownedByChildDivHidden">
+                                    </div>
+                                    <button class="win-button" type="button" onclick="CaptureImage();">סריקת מסמך</button>
+                                    <img class="lisenceImageHiden" data-win-bind="src: imgbase64" id="lisenceImage" width="250" height="250" />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <div class="toolbar-inner">
+                        <a id="deleteItem" href="" class="link">
+                            מחיקה
+                        </a>
+                        <a id="editItem" href="#" class="link">
+                            עריכה
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

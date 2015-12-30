@@ -17,7 +17,7 @@ var mainView;
 (function () {
     "use strict";
 
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
     //try {
     //    alert(jQuery);
@@ -32,20 +32,10 @@ var mainView;
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
 
-        // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
+
 
         // Initialize your app
         myApp = new Framework7();
-
-        //try
-        //{
-        //    alert(jQuery);
-        //}
-        //catch(err)
-        //{
-        //    alert(err.message);
-        //}
-
 
         // Export selectors engine
         $$ = Dom7;
@@ -58,16 +48,30 @@ var mainView;
         });
 
 
-        //$$(document).on('pageInit', function (e) {
-        //    // Get page data from event data
-        //    var page = e.detail.page;
-        //    if(page.name == 'requestsList')
-        //    {
-        //        //handleLoadStarted();
-        //        //LoadTableData();
-        //    }
+        //device back button support
+        document.addEventListener("backbutton", function (e) {
+            var page = myApp.getCurrentView().activePage;
+            myApp.hidePreloader();
+            if (page.name == "index") {
+                if (!confirm("Do you want to Exit?")) {
 
-        //})
+                    //navigator.app.clearHistory();
+                    //navigator.app.exitApp();
+                    e.preventDefault();
+                }
+                else {
+                    navigator.app.exitApp();
+                    //return true;
+                    //window.close();
+                    //close();
+                }
+            }
+            else {
+                mainView.router.back();
+                //navigator.app.backHistory();
+            }
+        }, false);
+
 
         myApp.onPageInit('requestsList', function (page) {
             handleLoadStarted();
@@ -100,6 +104,32 @@ var mainView;
             LoadStreetsData();
         });
 
+        myApp.onPageInit('newRequestSmall', function (page) {
+            //alert('init');
+            handleLoadStarted();
+            //alert('before validate');
+            try {
+                jQuery('#inputContainerForm').validate({ // initialize the plugin
+                    rules: {
+                        firstName: {
+                            required: true
+                        }
+                    },
+                    submitHandler: function (form) {
+                        //alert("submitted");
+                        UploadData();
+                        return false;
+                    }
+                });
+            }
+            catch (err) {
+                alert(err.message);
+            }
+            //alert('after validate');
+            LoadStreetsData();
+        });
+
+
         myApp.onPageInit('viewItem', function (page) {
             //alert('init');
 
@@ -109,6 +139,31 @@ var mainView;
             $$('#editItem').on('click', EditData);
             LoadSingleItem(page.query.itmId);
 
+        });
+
+        myApp.onPageInit('viewItemSmall', function (page) {
+            //alert('init');
+
+            handleLoadStarted();
+            currentItemId = page.query.itmId;
+            $$('#deleteItem').on('click', DeleteData);
+            $$('#editItem').on('click', EditData);
+            LoadSingleItem(page.query.itmId);
+
+        });
+
+        myApp.onPageInit('locationPage', function (page) {
+            //alert('init');
+
+            handleLoadStarted();
+
+            //$$('#editItem').on('click', EditData);
+            Locate();
+
+        });
+
+        myApp.onPageInit('barcodeScannerPage', function (page) {
+            $$('#scan').on('click', ScanBarcode);
         });
     };
 
@@ -131,7 +186,7 @@ function handleLoadFinished() {
 }
 
 function LoadSingleItem(itemId) {
-    var tbl = tlvmobileappClient.getTable("ParkingCharacterDataTBL");
+    var tbl = tlvmobClient.getTable("ParkingCharacterDataTBL");
     tbl.where({
         id: itemId
     }).read().done(function (results) {
@@ -153,16 +208,16 @@ function LoadSingleItem(itemId) {
 
 function LoadTableData() {
 
-    var tbl = tlvmobileappClient.getTable("ParkingCharacterDataTBL");
+    var tbl = tlvmobClient.getTable("ParkingCharacterDataTBL");
     tbl.take(50).read().done(function (results) {
         dataResults = results;
         var myList = myApp.virtualList('.request-items-list', {
             // Array with items data
             items: dataResults,
             renderItem: function (index, item) {
-                return '<a href="AppPages/ViewItemPage/ViewItem.html?itmId=' + item.id + '" class="item-link"><li class="item-content">' +
+                return '<a href="AppPages/ViewItemPage/ViewItemSmall.html?itmId=' + item.id + '" class="item-link"><li class="item-content">' +
                               '<div class="item-inner">' +
-                              '<div class="item-title item-title-serachable">' + item.firstName + '&nbsp;' + item.lastName + '</div>' +
+                              '<div class="item-title item-title-serachable">' + item.firstname + '&nbsp;' + item.lastname + '</div>' +
                               '<div class="item-title item-title-serachable">' + item.tz + '</div>' +
                           '</div>' +
                        '</li></a>';
@@ -171,8 +226,8 @@ function LoadTableData() {
                 var foundItems = [];
                 for (var i = 0; i < items.length; i++) {
                     // Check if title contains query string
-                    if (items[i].firstName.indexOf(query.trim()) >= 0 ||
-                        items[i].lastName.indexOf(query.trim()) >= 0 ||
+                    if (items[i].firstnme.indexOf(query.trim()) >= 0 ||
+                        items[i].lastname.indexOf(query.trim()) >= 0 ||
                         items[i].tz.indexOf(query.trim()) >= 0) {
                         foundItems.push(i);
                     }
@@ -180,14 +235,6 @@ function LoadTableData() {
                 // Return array with indexes of matched items
                 return foundItems;
             }
-            //// Template 7 template to render each item
-            //template: '<li class="item-content">' +
-            //              '<div class="item-media"><img src="{{imgbase64}}"></div>' +
-            //              '<div class="item-inner">' +
-            //                  '<div class="item-title">{{firstName}}&nbsp;{{lastName}}</div>' +
-            //                  '<div class="item-title">{{tz}}</div>' +
-            //              '</div>' +
-            //           '</li>'
         });
 
         var mySearchbar = myApp.searchbar('.searchbar', {
@@ -206,42 +253,19 @@ function LoadTableData() {
 
 function LoadStreetsData() {
     //alert('inside');
-    try
-    {
-        $$.getJSON('http://tlv-spinfra.cloudapp.net/MobileFacade/AnonimousServices.svc/streets', {}, function (data, status, xhr)
-        {
-            if(status == '200')
-            {
+    try {
+        $$.getJSON('http://mobilewebdb.cloudapp.net/MobileFacade/AnonimousServices.svc/streets', {}, function (data, status, xhr) {
+            if (status == '200') {
                 viewModel = data.GetStreetsResult;
                 getDropDownList('#streetsSelect', viewModel);
             }
-            else
-            {
+            else {
                 alert('Error loading data');
             }
             handleLoadFinished();
         });
-        //$$.getJSON('http://tlv-spinfra.cloudapp.net/MobileFacade/AnonimousServices.svc/streets', {})
-        //  .done(function (data) {
-        //      alert('data loaded');
-        //      viewModel = data.GetStreetsResult;
-        //      getDropDownList('#streetsSelect', viewModel);
-        //      alert('options created');
-        //      //
-        //      //$$("#address").autocomplete({
-        //      //    source: viewModel
-        //      //});
-
-        //      handleLoadFinished();
-        //  })
-        //  .fail(function ($$xhr, textStatus, error) {
-        //      var err = textStatus + ", " + error;
-        //      alert(err);
-        //      handleLoadFinished();
-        //  });
     }
-    catch(err)
-    {
+    catch (err) {
         alert('error ' + err.message);
     }
 }
@@ -257,26 +281,25 @@ function getDropDownList(id, optionList) {
 
 function UploadData() {
     myApp.showPreloader('שומר נתונים...');
-    var tbl = tlvmobileappClient.getTable("ParkingCharacterDataTBL");
-    //var jsonRes = [];
+    var tbl = tlvmobClient.getTable("ParkingCharacterDataTBL");
+
     var itm = {};
-    itm["firstName"] = jQuery("#firstName").val();
-    itm["lastName"] = jQuery("#lastName").val();
+    itm["firstname"] = jQuery("#firstName").val();
+    itm["lastname"] = jQuery("#lastName").val();
     itm["tz"] = jQuery("#tz").val();
-    itm["carPlate"] = jQuery("#carPlate").val();
-    itm["phoneNum"] = jQuery("#phoneNum").val();
-    itm["additionalPhoneNum"] = jQuery("#additionalPhoneNum").val();
+    itm["carplate"] = jQuery("#carPlate").val();
+    //itm["phoneNum"] = jQuery("#phoneNum").val();
+    //itm["additionalPhoneNum"] = jQuery("#additionalPhoneNum").val();
     itm["email"] = jQuery("#email").val();
-    itm["arnona"] = jQuery("#arnona").val();
+    //itm["arnona"] = jQuery("#arnona").val();
     itm["address"] = jQuery("#address").text();
-    itm["homeNum"] = jQuery("#homeNum").val();
-    itm["entrance"] = jQuery("#entrance").val();
+    itm["homenum"] = jQuery("#homeNum").val();
+    //itm["entrance"] = jQuery("#entrance").val();
     itm["appartments"] = jQuery("#appartments").val();
-    itm["zip"] = jQuery("#zip").val();
-    itm["carOwnership"] = jQuery("input[name=carOwnership]:checked").val();
+    //itm["zip"] = jQuery("#zip").val();
+    itm["carownership"] = jQuery("input[name=carOwnership]:checked").val();
     itm["imgbase64"] = jQuery("#lisenceImage").attr('src');
 
-    //jsonRes.push(itm);
     tbl.insert(itm).done(handleSuccess, handleError);
 }
 
@@ -294,12 +317,12 @@ function handleError(error) {
 
 function DeleteData() {
     myApp.confirm('האם ברצונך למחוק פריט זה ?', 'מחיקת פריט', function () {
-        var tbl = tlvmobileappClient.getTable("ParkingCharacterDataTBL");
+        var tbl = tlvmobClient.getTable("ParkingCharacterDataTBL");
         tbl.del({
             id: currentItemId
         }).done(function () {
             mainView.router.back(
-                { 
+                {
                     url: "AppPages/MainPage/MainPage.html",
                     force: true,
                 });
@@ -310,8 +333,7 @@ function DeleteData() {
     });
 }
 
-function EditData()
-{
+function EditData() {
 
 }
 
@@ -373,4 +395,69 @@ function clearCarOwners() {
 function setCarOwners(divId, divClassName) {
     document.getElementById(divId).className = divClassName;
     document.getElementById("carOwnershipContainer").className = "carOwnershipVisible";
+}
+
+
+function initializeMap(latitude, longitude) {
+    var mapOptions = {
+        center: new google.maps.LatLng(latitude, longitude),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        animation: google.maps.Animation.DROP,
+    };
+
+    jQuery("#mapDiv").height(jQuery("#mapDiv").outerWidth());
+
+    var mapVar = new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
+
+    var trafficLayer = new google.maps.TrafficLayer();
+    trafficLayer.setMap(mapVar);
+
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(latitude, longitude),
+        map: mapVar,
+        title: "I'm here!",
+        animation: google.maps.Animation.DROP
+    });
+}
+
+function Locate() {
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+
+        handleLoadFinished();
+        initializeMap(position.coords.latitude, position.coords.longitude);
+
+
+    }, function (error) {
+        handleLoadFinished();
+        alert("Unable to get location: " + error.message);
+    }, {
+        maximumAge: 3000, timeout: 10000, enableHighAccuracy: true
+    });
+
+
+
+
+}
+
+
+function ScanBarcode() {
+    cordova.plugins.barcodeScanner.scan(
+      function (result) {
+          alert("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Format: " + result.format + "\n" +
+                "Cancelled: " + result.cancelled);
+      },
+      function (error) {
+          alert("Scanning failed: " + error);
+      },
+      {
+          "preferFrontCamera": false,
+          "showFlipCameraButton": true,
+          "prompt": "Place a barcode inside the scan area", // supported on Android only
+          "formats": "QR_CODE,PDF_417" // default: all but PDF_417 and RSS_EXPANDED
+      }
+   );
 }
